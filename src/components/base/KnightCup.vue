@@ -1,7 +1,5 @@
 <template>
-  <main>
-    <router-view></router-view>
-  </main>
+  <h2>Redberry Knight Cup</h2>
 </template>
 
 <script>
