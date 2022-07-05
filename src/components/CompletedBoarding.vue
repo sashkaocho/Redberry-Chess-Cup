@@ -1,5 +1,5 @@
 <template>
-  <h1></h1>
+  <h1>Onboarding Completed!</h1>
 </template>
 
 <script>

@@ -1,23 +1,16 @@
 <template>
   <h1>Chess Says Who We Are</h1>
-  <router-link to="/registration">Get Started</router-link>
-  <personal-information v-if="visible"></personal-information>
+  <button @click.prevent="goToStep(2)">Get Started</button>
 </template>
 
 <script>
-import PersonalInformation from './PersonalInformation.vue';
-
 export default {
-  components: { PersonalInformation },
   data() {
-    return {
-      visible: false,
-    };
+    return {};
   },
   methods: {
-    movoToNextPage() {
-      // this.visible = !this.visible;
-      console.log(this.visible);
+    goToStep(step) {
+      this.$store.state.currentStep = step;
     },
   },
 };
