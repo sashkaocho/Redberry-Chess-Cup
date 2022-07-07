@@ -1,5 +1,5 @@
 <template>
-  <h2>Redberry Knight Cup</h2>
+  <h1>Redberry Knight Cup</h1>
 </template>
 
 <script>

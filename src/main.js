@@ -5,18 +5,40 @@ import App from './App.vue';
 import router from './router';
 
 import BaseDialog from './components/base/BaseDialog.vue';
+import BaseButton from './components/base/BaseButton.vue';
+
+import TheKnightCup from './components/layouts/TheKnightCup.vue';
 
 const store = createStore({
   state() {
     return {
-      currentStep: 1,
+      name: '',
+      email: '',
+      phone: '',
+      date: '',
     };
+  },
+  mutations: {
+    setName(state, value) {
+      state.name = value;
+    },
+    setEmail(state, value) {
+      state.email = value;
+    },
+    setPhone(state, value) {
+      state.phone = value;
+    },
+    setDate(state, value) {
+      state.date = value;
+    },
   },
 });
 
 const app = createApp(App);
 
 app.component('base-dialog', BaseDialog);
+app.component('base-button', BaseButton);
+app.component('the-knight-cup', TheKnightCup);
 
 app.use(store);
 

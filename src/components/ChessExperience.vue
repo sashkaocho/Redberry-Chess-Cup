@@ -17,16 +17,30 @@
         <option></option>
       </select>
     </div>
-    <button @click.prevent="goToStep(2)">Back</button>
-    <button @click.prevent="goToStep(4)">Done</button>
+    <div>
+      <p><input type="radio" name="answer" value="Yes" /> Yes</p>
+      <p><input type="radio" name="answer" value="No" /> No</p>
+    </div>
+    <button @click.prevent="navigatePrev">Back</button>
+    <button @click.prevent="navigateNext">Done</button>
   </form>
 </template>
 
 <script>
 export default {
   methods: {
-    goToStep(step) {
-      this.$store.state.currentStep = step;
+    loadCharacters() {
+      fetch();
+    },
+    navigatePrev() {
+      if (this.$route.name == 'experience') {
+        this.$router.push('/registration');
+      }
+    },
+    navigateNext() {
+      if (this.$route.name == 'experience') {
+        this.$router.push('/complete');
+      }
     },
   },
 };

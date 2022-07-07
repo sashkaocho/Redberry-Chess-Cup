@@ -1,6 +1,6 @@
 <template>
   <h1>Chess Says Who We Are</h1>
-  <button @click.prevent="goToStep(2)">Get Started</button>
+  <base-button @click.prevent="navigateNext">Get Started</base-button>
 </template>
 
 <script>
@@ -9,8 +9,10 @@ export default {
     return {};
   },
   methods: {
-    goToStep(step) {
-      this.$store.state.currentStep = step;
+    navigateNext() {
+      if (this.$route.name == 'main') {
+        this.$router.push('/registration');
+      }
     },
   },
 };

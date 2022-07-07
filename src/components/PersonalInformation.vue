@@ -1,13 +1,49 @@
 <template>
   <h2>Personal Information</h2>
   <p>This Is Basic Information Fields</p>
-  <base-dialog v-if="formIsInvalid" title="Invalid Input" @close="confirmError">
+  <base-dialog
+    v-if="formIsInvalid && (name === '' || name.length < 2)"
+    title="Invalid Input"
+    @close="confirmError"
+  >
     <template #default>
-      <p>Unfortunately, at least one input value is invalid.</p>
-      <p>
-        Please, check all inputs and make sure you enter at least a few
-        characters into each input field.
-      </p>
+      <p>Please enter valid name</p>
+    </template>
+    <template #actions>
+      <button @click="confirmError">Okay</button>
+    </template>
+  </base-dialog>
+  <base-dialog
+    v-if="formIsInvalid && (email === '' || !email.includes('@'))"
+    title="Invalid Input"
+    @close="confirmError"
+  >
+    <template #default>
+      <p>Please enter valid email</p>
+    </template>
+    <template #actions>
+      <button @click="confirmError">Okay</button>
+    </template>
+  </base-dialog>
+  <!-- <base-dialog
+    v-if="formIsInvalid && (phone === '' || phone.length !== 9)"
+    title="Invalid Input"
+    @close="confirmError"
+  >
+    <template #default>
+      <p>Please enter valid phone</p>
+    </template>
+    <template #actions>
+      <button @click="confirmError">Okay</button>
+    </template>
+  </base-dialog> -->
+  <base-dialog
+    v-if="formIsInvalid && date === ''"
+    title="Invalid Input"
+    @close="confirmError"
+  >
+    <template #default>
+      <p>Please enter valid date</p>
     </template>
     <template #actions>
       <button @click="confirmError">Okay</button>
@@ -15,18 +51,18 @@
   </base-dialog>
   <form @submit.prevent="validateForm">
     <div>
-      <input placeholder="Name*" type="text" ref="nameInput" />
+      <input placeholder="Name*" type="text" v-model="name" />
     </div>
     <div>
-      <input placeholder="Email address*" type="text" ref="emailInput" />
+      <input placeholder="Email address*" type="text" v-model="email" />
     </div>
     <div>
-      <input placeholder="Phone number*" type="number" ref="phoneInput" />
+      <input placeholder="Phone number*" type="number" v-model="phone" />
     </div>
     <div>
-      <input placeholder="Date of birth*" type="text" ref="dataInput" />
+      <input placeholder="Date of birth*" type="text" v-model="date" />
     </div>
-    <button @click.prevent="goToStep(1)">Back</button>
+    <button @click.prevent="navigatePrev">Back</button>
     <button>Next</button>
   </form>
 </template>
@@ -38,27 +74,61 @@ export default {
       formIsInvalid: false,
     };
   },
-  methods: {
-    goToStep(step) {
-      this.$store.state.currentStep = step;
+  computed: {
+    name: {
+      get() {
+        return this.$store.state.name;
+      },
+      set(value) {
+        this.$store.commit('setName', value);
+      },
     },
-
+    email: {
+      get() {
+        return this.$store.state.email;
+      },
+      set(value) {
+        this.$store.commit('setEmail', value);
+      },
+    },
+    phone: {
+      get() {
+        return this.$store.state.phone;
+      },
+      set(value) {
+        this.$store.commit('setPhone', value);
+      },
+    },
+    date: {
+      get() {
+        return this.$store.state.date;
+      },
+      set(value) {
+        this.$store.commit('setDate', value);
+      },
+    },
+  },
+  methods: {
     validateForm() {
-      const enteredName = this.$refs.nameInput.value;
-      const enteredEmail = this.$refs.emailInput.value;
-      const enteredPhone = this.$refs.phoneInput.value;
-
       if (
-        enteredName.trim() === '' ||
-        enteredEmail.trim() === '' ||
-        enteredPhone.trim() === ''
+        this.name.trim() === '' ||
+        this.name.trim().length < 2 ||
+        this.email.trim() === '' ||
+        !this.email.trim().includes('@') ||
+        // this.phone === '' ||
+        // this.phone.length !== 9 ||
+        this.date.trim() === ''
       ) {
         this.formIsInvalid = true;
         return;
       }
-      this.goToStep(3);
+      this.$router.push('/experience');
     },
-
+    navigatePrev() {
+      if (this.$route.name == 'registration') {
+        this.$router.push('/main');
+      }
+    },
     confirmError() {
       this.formIsInvalid = false;
     },
