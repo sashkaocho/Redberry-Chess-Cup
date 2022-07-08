@@ -63,7 +63,7 @@
       <input placeholder="Date of birth*" type="text" v-model="date" />
     </div>
     <button @click.prevent="navigatePrev">Back</button>
-    <button>Next</button>
+    <base-button>Next</base-button>
   </form>
 </template>
 

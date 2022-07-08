@@ -1,6 +1,9 @@
 <template>
   <button>
     <slot></slot>
+    <span>
+      <img src="../img/Vector.png" alt="vct" />
+    </span>
   </button>
 </template>
 
@@ -37,6 +40,15 @@ button {
   line-height: 27px;
   text-transform: capitalize;
 
-  color: #ffffff;
+  color: white;
+}
+
+img {
+  position: absolute;
+  left: 75%;
+  right: 0%;
+  top: 27%;
+  bottom: 0%;
+  color: white;
 }
 </style>
