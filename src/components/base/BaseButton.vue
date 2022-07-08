@@ -16,6 +16,8 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@800&family=Open+Sans:wght@400;800&display=swap');
+
 button {
   display: flex;
   flex-direction: column;
@@ -23,12 +25,14 @@ button {
   padding: 13px 24px;
   gap: 10px;
   color: white;
-
   position: absolute;
   width: 191px;
   height: 53px;
   left: 1008px;
   top: 601px;
+  z-index: 3;
+
+  font-family: 'open suns';
 
   background: #212529;
   border-radius: 8px;

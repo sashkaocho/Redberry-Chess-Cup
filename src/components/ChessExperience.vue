@@ -14,9 +14,11 @@
     <div>
       <input placeholder="Choose your character*" type="text" />
       <select name="nameSelect" @click="loadCharacters">
+        <option value=""></option>
         <chess-characters
           v-for="character in characters"
           :name="character.name"
+          :image="character.image"
           :key="character.id"
         ></chess-characters>
       </select>
