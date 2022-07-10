@@ -2,30 +2,28 @@
   <div class="second">
     <img src="./img/secondpage.png" alt="" />
   </div>
-  <h1>Personal information</h1>
-  <p>This Is Basic Information Fields</p>
+  <h1 class="reg_title">Start Creating Your Account</h1>
+  <hr />
+  <h1>"when you see a good move, look for a better one."</h1>
+  <h1 class="author">-emanuel lasker</h1>
+  <h2>Personal information</h2>
+  <strong>This Is Basic Information Fields</strong>
   <base-dialog
     v-if="formIsInvalid && (name === '' || name.length < 2)"
-    title="Invalid Input"
+    title="Invalid Name"
     @close="confirmError"
   >
     <template #default>
       <p>Please enter valid name</p>
     </template>
-    <template #actions>
-      <button @click="confirmError">Okay</button>
-    </template>
   </base-dialog>
   <base-dialog
     v-if="formIsInvalid && (email === '' || !email.includes('@'))"
-    title="Invalid Input"
+    title="Invalid Email"
     @close="confirmError"
   >
     <template #default>
       <p>Please enter valid email</p>
-    </template>
-    <template #actions>
-      <button @click="confirmError">Okay</button>
     </template>
   </base-dialog>
   <!-- <base-dialog
@@ -42,14 +40,11 @@
   </base-dialog> -->
   <base-dialog
     v-if="formIsInvalid && date === ''"
-    title="Invalid Input"
+    title="Invalid Date"
     @close="confirmError"
   >
     <template #default>
       <p>Please enter valid date</p>
-    </template>
-    <template #actions>
-      <button @click="confirmError">Okay</button>
     </template>
   </base-dialog>
   <form>
@@ -140,7 +135,7 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@800&family=Open+Sans:wght@400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700&display=swap');
 
 .form-control {
   margin: 0.5rem 0;
@@ -213,7 +208,7 @@ form {
   top: 420px;
 }
 
-h1 {
+h2 {
   position: absolute;
   width: 500px;
   height: 48px;
@@ -229,12 +224,12 @@ h1 {
   color: #000000;
 }
 
-p {
+strong {
   position: absolute;
   width: 250px;
   height: 21px;
   left: 971px;
-  top: 350px;
+  top: 365px;
 
   font-family: 'Open Sans';
   font-style: normal;
@@ -245,5 +240,68 @@ p {
   text-transform: capitalize;
 
   color: #95939a;
+}
+
+h1 {
+  position: absolute;
+  width: 423px;
+  height: 83px;
+  left: 132px;
+  top: 295px;
+
+  font-family: 'Nunito';
+  font-style: italic;
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 35px;
+  text-transform: uppercase;
+
+  color: #212529;
+}
+
+.author {
+  position: absolute;
+  width: 280px;
+  height: 33px;
+  left: 132px;
+  top: 402px;
+  z-index: 7;
+
+  font-family: 'Nunito';
+  font-style: italic;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 33px;
+
+  text-transform: uppercase;
+  color: #e5e6e8;
+}
+
+hr {
+  position: absolute;
+  width: 999px;
+  height: 0px;
+  left: 923px;
+  top: 75px;
+
+  border: 1px solid rgba(185, 180, 196, 0.3);
+}
+
+.reg_title {
+  position: absolute;
+  width: 215px;
+  height: 24px;
+  left: 971px;
+  top: 20px;
+
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+
+  text-transform: capitalize;
+
+  color: #212529;
 }
 </style>

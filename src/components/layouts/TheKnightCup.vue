@@ -28,13 +28,13 @@ h1 {
   position: absolute;
   height: 23.35px;
   left: 100px;
-  top: 0px;
+  top: -7px;
   color: #ffffff;
 }
 img {
   width: 19px;
   position: absolute;
   left: -26px;
-  top: 8px;
+  top: 13px;
 }
 </style>
