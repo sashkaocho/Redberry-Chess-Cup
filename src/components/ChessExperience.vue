@@ -11,19 +11,17 @@
   <h2>Chess Experience</h2>
   <strong>This Is Basic Information Fields</strong>
   <form>
-    <div class="form_control">
-      <input placeholder="Level of knowledge*" type="text" />
+    <div class="level">
       <select name="nameSelect">
-        <option></option>
+        <option>Level of knowledge*</option>
         <option value="1">Beginner</option>
         <option value="2">Intermediate</option>
         <option value="3">Professional</option>
       </select>
     </div>
-    <div class="form_control">
-      <input placeholder="Choose your character*" type="text" />
+    <div class="character">
       <select name="nameSelect" @click="loadCharacters">
-        <option value=""></option>
+        <option>Choose your character*</option>
         <chess-characters
           v-for="character in characters"
           :name="character.name"
@@ -32,12 +30,14 @@
         ></chess-characters>
       </select>
     </div>
-    <div>
-      <p>
-        <input type="radio" name="answer" value="Yes" />
-        Yes
-      </p>
-      <p><input type="radio" name="answer" value="No" /> No</p>
+    <h3>Have you participated in the Redberry Championship?</h3>
+    <div class="yes">
+      <input type="radio" id="ans" value="yes" name="rating" v-model="answer" />
+      <label for="ans">Yes</label>
+    </div>
+    <div class="no">
+      <input type="radio" id="ans" value="no" name="rating" v-model="answer" />
+      <label for="ans">No</label>
     </div>
   </form>
   <base-back-button @click.prevent="navigatePrev">Back</base-back-button>
@@ -54,7 +54,18 @@ export default {
   data() {
     return {
       characters: [],
+      isActive: false,
     };
+  },
+  computed: {
+    answer: {
+      get() {
+        return this.$store.state.answer;
+      },
+      set(value) {
+        this.$store.commit('setAnswer', value);
+      },
+    },
   },
   methods: {
     loadCharacters() {
@@ -88,6 +99,9 @@ export default {
         this.$router.push('/complete');
       }
     },
+    toggleClass() {
+      this.isActive = !this.isActive;
+    },
   },
 };
 </script>
@@ -101,7 +115,62 @@ export default {
   top: 34px;
 }
 
-form {
+h3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 8px 16px;
+
+  position: absolute;
+  width: 775px;
+  height: 46px;
+  left: 960px;
+  top: 617px;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 150%;
+  color: #212529;
+
+  background: #ffffff;
+  border-radius: 4px;
+}
+
+.yes {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+
+  position: absolute;
+  width: 58px;
+  height: 24px;
+  left: 976px;
+  top: 710px;
+
+  background: rgba(255, 255, 255, 1e-6);
+}
+
+.no {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+
+  position: absolute;
+  width: 54px;
+  height: 24px;
+  left: 1050px;
+  top: 710px;
+
+  background: rgba(255, 255, 255, 1e-6);
+}
+
+/* form {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -113,7 +182,7 @@ form {
   height: 304px;
   left: 971px;
   top: 500px;
-}
+} */
 
 h1 {
   position: absolute;
@@ -237,9 +306,63 @@ strong {
   color: #95939a;
 }
 
-.form_control {
+.level {
+  position: absolute;
+  width: 392px;
+  height: 46px;
+  left: 961px;
+  top: 491px;
   background: #ffffff;
+  color: #212529;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
   box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.125);
   border-radius: 4px;
+}
+
+.character {
+  position: absolute;
+  width: 392px;
+  height: 46px;
+  left: 1376px;
+  top: 491px;
+  background: #ffffff;
+  color: #212529;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+
+  box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.125);
+  border-radius: 4px;
+}
+
+option {
+  color: #212529;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+}
+
+select {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 150%;
+
+  position: absolute;
+  width: 312px;
+  height: 30px;
+  left: 16px;
+  top: 8px;
 }
 </style>

@@ -18,6 +18,9 @@ const store = createStore({
       email: '',
       phone: '',
       date: '',
+      level: '',
+      character: '',
+      answer: null,
     };
   },
   mutations: {
@@ -32,6 +35,15 @@ const store = createStore({
     },
     setDate(state, value) {
       state.date = value;
+    },
+    setLevel(state, value) {
+      state.level = value;
+    },
+    setCharacter(state, value) {
+      state.character = value;
+    },
+    setAnswer(state, value) {
+      state.answer = value;
     },
   },
 });
