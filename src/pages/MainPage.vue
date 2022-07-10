@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img src="./img/firstpage.png" alt="" />
+    <img src="../components/img/firstpage.png" alt="" />
   </div>
   <div class="title"></div>
   <h1>CHESS SAYS</h1>

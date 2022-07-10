@@ -1,6 +1,6 @@
 <template>
   <div class="fourth">
-    <img src="./img/fourthpage.png" alt="" />
+    <img src="../components/img/fourthpage.png" alt="" />
   </div>
   <h1>Onboarding completed!</h1>
 </template>

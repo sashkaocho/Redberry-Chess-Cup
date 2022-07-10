@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import MainPage from './components/MainPage.vue';
-import PersonalInformation from './components/PersonalInformation.vue';
-import ChessExperience from './components/ChessExperience.vue';
-import CompletedBoarding from './components/CompletedBoarding.vue';
-import NotFound from './components/NotFound.vue';
+import MainPage from './pages/MainPage.vue';
+import PersonalInformation from './pages/PersonalInformation.vue';
+import ChessExperience from './pages/ChessExperience.vue';
+import CompletedBoarding from './pages/CompletedBoarding.vue';
+import NotFound from './pages/NotFound.vue';
 
 const router = createRouter({
   history: createWebHistory(),

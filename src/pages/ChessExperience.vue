@@ -1,6 +1,6 @@
 <template>
   <div class="third">
-    <img src="./img/thirdpage.png" alt="" />
+    <img src="../components/img/thirdpage.png" alt="" />
   </div>
   <h1 class="reg_title">first step is done, continue to finish onboarding</h1>
   <hr />
@@ -19,9 +19,9 @@
     <h3 class="level_title">Level of knowledge*</h3>
     <div class="level">
       <select v-model="level" name="nameSelect">
-        <option value="1">Beginner</option>
-        <option value="2">Intermediate</option>
-        <option value="3">Professional</option>
+        <option value="Beginner">Beginner</option>
+        <option value="Intermediate">Intermediate</option>
+        <option value="Professional">Professional</option>
       </select>
     </div>
     <h3 class="char_title">Choose your character*</h3>
@@ -32,16 +32,29 @@
           :name="character.name"
           :image="character.image"
           :key="character.id"
+          :value="character.id"
         ></chess-characters>
       </select>
     </div>
     <h3>Have you participated in the Redberry Championship?</h3>
     <div class="yes">
-      <input type="radio" id="ans" value="yes" name="rating" v-model="answer" />
+      <input
+        type="radio"
+        id="ans"
+        value="true"
+        name="rating"
+        v-model="answer"
+      />
       <label for="ans">Yes</label>
     </div>
     <div class="no">
-      <input type="radio" id="ans" value="no" name="rating" v-model="answer" />
+      <input
+        type="radio"
+        id="ans"
+        value="false"
+        name="rating"
+        v-model="answer"
+      />
       <label for="ans">No</label>
     </div>
   </form>
@@ -50,7 +63,7 @@
 </template>
 
 <script>
-import ChessCharacters from './ChessCharacters.vue';
+import ChessCharacters from '../components/ChessCharacters.vue';
 
 export default {
   components: {
@@ -120,6 +133,31 @@ export default {
         return;
       }
       this.$router.push('/complete');
+      fetch('https://project-adcfb-default-rtdb.firebaseio.com//users.json', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: this.$store.state.name,
+          email: this.$store.state.email,
+          date_of_birth: this.$store.state.date,
+          experience_level: this.level,
+          already_participated: this.answer,
+          character_id: this.character,
+        }),
+      })
+        .then((response) => {
+          if (response.ok) {
+            //...
+          } else {
+            throw new Error('Could not save data');
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          this.error = error.message;
+        });
     },
     navigatePrev() {
       if (this.$route.name == 'experience') {

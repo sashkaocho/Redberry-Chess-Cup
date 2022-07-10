@@ -1,6 +1,6 @@
 <template>
   <div class="second">
-    <img src="./img/secondpage.png" alt="" />
+    <img src="../components/img/secondpage.png" alt="" />
   </div>
   <h1 class="reg_title">Start Creating Your Account</h1>
   <hr />
@@ -34,9 +34,6 @@
     <template #default>
       <p>Please enter valid phone</p>
     </template>
-    <template #actions>
-      <button @click="confirmError">Okay</button>
-    </template>
   </base-dialog> -->
   <base-dialog
     v-if="formIsInvalid && date === ''"
@@ -48,7 +45,7 @@
     </template>
   </base-dialog>
   <form>
-    <div class="form_control">
+    <div class="form_control" :class="{ invalid: formIsInvalid === true }">
       <input placeholder="Name*" type="text" v-model="name" />
     </div>
     <div class="form_control">
@@ -58,7 +55,7 @@
       <input placeholder="Phone number*" type="number" v-model="phone" />
     </div>
     <div class="form_control">
-      <input placeholder="Date of birth*" type="text" v-model="date" />
+      <input placeholder="Date of birth*" type="date" v-model="date" />
     </div>
   </form>
   <base-back-button @click.prevent="navigatePrev">Back</base-back-button>
@@ -118,6 +115,7 @@ export default {
         this.date.trim() === ''
       ) {
         this.formIsInvalid = true;
+
         return;
       }
       this.$router.push('/experience');
@@ -136,10 +134,6 @@ export default {
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700&display=swap');
-
-.form-control {
-  margin: 0.5rem 0;
-}
 
 .form_control {
   display: flex;
@@ -174,15 +168,6 @@ input {
   order: 0;
   align-self: stretch;
   flex-grow: 0;
-}
-
-.form-control {
-  margin: 0.5rem 0;
-}
-
-.disabled {
-  opacity: 0.5;
-  pointer-events: none;
 }
 
 img {
@@ -222,6 +207,10 @@ h2 {
   line-height: 150%;
 
   color: #000000;
+}
+
+.form_control.invalid input {
+  border-color: red;
 }
 
 strong {
