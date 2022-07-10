@@ -3,6 +3,7 @@
     <img src="../components/img/fourthpage.png" alt="" />
   </div>
   <h1>Onboarding completed!</h1>
+  <img class="complete" src="../components/img/complete.png" alt="" />
 </template>
 
 <script>
@@ -15,7 +16,7 @@ h1 {
   height: 54px;
   position: absolute;
   top: 600px;
-  left: 1150px;
+  left: 1050px;
   font-family: 'Nunito';
   font-style: normal;
   font-weight: 800;
@@ -31,5 +32,13 @@ h1 {
   height: 996px;
   left: 0px;
   top: 84px;
+}
+
+.complete {
+  width: 400px;
+  height: 250px;
+  position: absolute;
+  left: 1050px;
+  top: 350px;
 }
 </style>

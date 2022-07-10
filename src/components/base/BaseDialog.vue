@@ -7,14 +7,14 @@
           <h2>
             <img class="err" src="../img/Vector4.png" alt="" />{{ title }}
           </h2>
-          <img
-            class="close"
-            @click="$emit('close')"
-            src="../img/Vector3.png"
-            alt=""
-          />
         </slot>
       </header>
+      <img
+        class="close"
+        @click="$emit('close')"
+        src="../img/Vector3.png"
+        alt=""
+      />
       <hr />
       <section>
         <slot></slot>
@@ -76,7 +76,9 @@ header {
   font-weight: 400;
   font-size: 14px;
   line-height: 21px;
-
+  position: absolute;
+  left: 0%;
+  top: -118px;
   color: #dc3545;
 
   flex: none;

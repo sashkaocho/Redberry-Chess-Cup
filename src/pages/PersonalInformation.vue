@@ -45,21 +45,47 @@
     </template>
   </base-dialog>
   <form>
-    <div class="form_control" :class="{ invalid: formIsInvalid === true }">
+    <div class="form_control" :class="{ invalid: checkName === 'invalid' }">
       <input placeholder="Name*" type="text" v-model="name" />
+      <img
+        v-if="name !== '' && name.length >= 2"
+        class="valid1"
+        src="../components/img/Vector6.png"
+        alt=""
+      />
     </div>
-    <div class="form_control">
+    <div class="form_control" :class="{ invalid: checkEmail === 'invalid' }">
       <input placeholder="Email address*" type="text" v-model="email" />
+      <img
+        v-if="email !== '' && email.includes('@')"
+        class="valid2"
+        src="../components/img/Vector6.png"
+        alt=""
+      />
     </div>
-    <div class="form_control">
+    <div class="form_control" :class="{ invalid: checkPhone === 'invalid' }">
       <input placeholder="Phone number*" type="number" v-model="phone" />
+      <img
+        v-if="phone !== '' && phone.length === 9"
+        class="valid3"
+        src="../components/img/Vector6.png"
+        alt=""
+      />
     </div>
-    <div class="form_control">
+    <div class="form_control" :class="{ invalid: checkDate === 'invalid' }">
       <input placeholder="Date of birth*" type="date" v-model="date" />
+      <img
+        v-if="date !== ''"
+        class="valid4"
+        src="../components/img/Vector6.png"
+        alt=""
+      />
     </div>
   </form>
   <base-back-button @click.prevent="navigatePrev">Back</base-back-button>
-  <base-next-button @click.prevent="validateForm">Next</base-next-button>
+  <base-next-button @click="validateInput" @click.prevent="validateForm"
+    >Next</base-next-button
+  >
 </template>
 
 <script>
@@ -67,6 +93,10 @@ export default {
   data() {
     return {
       formIsInvalid: false,
+      checkName: 'pending',
+      checkEmail: 'pending',
+      checkPhone: 'pending',
+      checkDate: 'pending',
     };
   },
   computed: {
@@ -103,6 +133,34 @@ export default {
       },
     },
   },
+  mounted() {
+    if (localStorage.name) {
+      this.name = localStorage.name;
+    }
+    if (localStorage.email) {
+      this.email = localStorage.email;
+    }
+    // if (localStorage.phone) {
+    //   this.phone = localStorage.phone;
+    // }
+    if (localStorage.date) {
+      this.date = localStorage.date;
+    }
+  },
+  watch: {
+    name(newName) {
+      localStorage.name = newName;
+    },
+    email(newEmail) {
+      localStorage.email = newEmail;
+    },
+    // phone(newName) {
+    //   localStorage.name = newName;
+    // },
+    date(newDate) {
+      localStorage.name = newDate;
+    },
+  },
   methods: {
     validateForm() {
       if (
@@ -127,6 +185,31 @@ export default {
     },
     confirmError() {
       this.formIsInvalid = false;
+    },
+    validateInput() {
+      if (this.name.trim() === '' || this.name.trim().length < 2) {
+        this.checkName = 'invalid';
+      } else {
+        this.checkName = 'valid';
+      }
+
+      if (this.email.trim() === '' || !this.email.trim().includes('@')) {
+        this.checkEmail = 'invalid';
+      } else {
+        this.checkEmail = 'valid';
+      }
+
+      // if (this.phone === '' || this.phone.length !== 9) {
+      //   this.checkPhone = 'invalid';
+      // } else {
+      //   this.checkPhone = 'valid';
+      // }
+
+      if (this.date.trim() === '') {
+        this.checkDate = 'invalid';
+      } else {
+        this.checkDate = 'valid';
+      }
     },
   },
 };
@@ -170,6 +253,42 @@ input {
   flex-grow: 0;
 }
 
+.valid1 {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  left: 770px;
+  top: 25px;
+  border-radius: 0px;
+}
+
+.valid2 {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  left: 770px;
+  top: 125px;
+  border-radius: 0px;
+}
+
+.valid3 {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  left: 770px;
+  top: 225px;
+  border-radius: 0px;
+}
+
+.valid4 {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  left: 770px;
+  top: 325px;
+  border-radius: 0px;
+}
+
 img {
   position: absolute;
   height: 996px;
@@ -211,6 +330,7 @@ h2 {
 
 .form_control.invalid input {
   border-color: red;
+  color: red;
 }
 
 strong {

@@ -9,4 +9,18 @@
 export default {};
 </script>
 
-<style></style>
+<style>
+h2 {
+  position: absolute;
+  width: 775px;
+  height: 46px;
+  left: 30px;
+  top: 100px;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 150%;
+  color: #212529;
+}
+</style>

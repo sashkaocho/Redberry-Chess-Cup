@@ -101,6 +101,28 @@ export default {
       },
     },
   },
+  mounted() {
+    if (localStorage.answer) {
+      this.answer = localStorage.answer;
+    }
+    if (localStorage.level) {
+      this.level = localStorage.level;
+    }
+    if (localStorage.character) {
+      this.character = localStorage.character;
+    }
+  },
+  watch: {
+    answer(newAnswer) {
+      localStorage.answer = newAnswer;
+    },
+    level(newLevel) {
+      localStorage.level = newLevel;
+    },
+    character(newCharacter) {
+      localStorage.character = newCharacter;
+    },
+  },
   methods: {
     loadCharacters() {
       fetch('https://chess-tournament-api.devtest.ge/api/grandmasters')
@@ -158,6 +180,13 @@ export default {
           console.log(error);
           this.error = error.message;
         });
+
+      (this.$store.state.name = ''),
+        (this.$store.state.email = ''),
+        (this.$store.state.date = '');
+      this.level = '';
+      this.answer = null;
+      this.character = '';
     },
     navigatePrev() {
       if (this.$route.name == 'experience') {
