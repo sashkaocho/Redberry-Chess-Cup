@@ -6,6 +6,7 @@
   <hr />
   <h1>"when you see a good move, look for a better one."</h1>
   <h1 class="author">-emanuel lasker</h1>
+  <the-progress></the-progress>
   <h2>Personal information</h2>
   <strong>This Is Basic Information Fields</strong>
   <base-dialog
@@ -26,7 +27,7 @@
       <p>Please enter valid email</p>
     </template>
   </base-dialog>
-  <!-- <base-dialog
+  <base-dialog
     v-if="formIsInvalid && (phone === '' || phone.length !== 9)"
     title="Invalid Input"
     @close="confirmError"
@@ -34,7 +35,7 @@
     <template #default>
       <p>Please enter valid phone</p>
     </template>
-  </base-dialog> -->
+  </base-dialog>
   <base-dialog
     v-if="formIsInvalid && date === ''"
     title="Invalid Date"
@@ -64,7 +65,7 @@
       />
     </div>
     <div class="form_control" :class="{ invalid: checkPhone === 'invalid' }">
-      <input placeholder="Phone number*" type="number" v-model="phone" />
+      <input placeholder="Phone number*" type="text" v-model="phone" />
       <img
         v-if="phone !== '' && phone.length === 9"
         class="valid3"
@@ -140,9 +141,9 @@ export default {
     if (localStorage.email) {
       this.email = localStorage.email;
     }
-    // if (localStorage.phone) {
-    //   this.phone = localStorage.phone;
-    // }
+    if (localStorage.phone) {
+      this.phone = localStorage.phone;
+    }
     if (localStorage.date) {
       this.date = localStorage.date;
     }
@@ -154,22 +155,25 @@ export default {
     email(newEmail) {
       localStorage.email = newEmail;
     },
-    // phone(newName) {
-    //   localStorage.name = newName;
-    // },
+    phone(newName) {
+      localStorage.name = newName;
+    },
     date(newDate) {
       localStorage.name = newDate;
     },
   },
   methods: {
+    log() {
+      console.log(this.phone.trim() === '');
+    },
     validateForm() {
       if (
         this.name.trim() === '' ||
         this.name.trim().length < 2 ||
         this.email.trim() === '' ||
         !this.email.trim().includes('@') ||
-        // this.phone === '' ||
-        // this.phone.length !== 9 ||
+        this.phone.trim() === '' ||
+        this.phone.trim().length !== 9 ||
         this.date.trim() === ''
       ) {
         this.formIsInvalid = true;
@@ -199,11 +203,11 @@ export default {
         this.checkEmail = 'valid';
       }
 
-      // if (this.phone === '' || this.phone.length !== 9) {
-      //   this.checkPhone = 'invalid';
-      // } else {
-      //   this.checkPhone = 'valid';
-      // }
+      if (this.phone === '' || this.phone.length !== 9) {
+        this.checkPhone = 'invalid';
+      } else {
+        this.checkPhone = 'valid';
+      }
 
       if (this.date.trim() === '') {
         this.checkDate = 'invalid';

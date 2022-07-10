@@ -8,6 +8,7 @@
     "many have become chess masters; no one has become the master of chess."
   </h1>
   <h1 class="author">- siegbert tarrasch</h1>
+  <the-progress></the-progress>
   <h2>Chess Experience</h2>
   <strong>This Is Basic Information Fields</strong>
   <base-dialog v-if="formIsInvalid" title="Invalid Input" @close="confirmError">
@@ -132,7 +133,6 @@ export default {
           }
         })
         .then((data) => {
-          // console.log(data[0].name);
           const characters = [];
           for (const id in data) {
             characters.push({

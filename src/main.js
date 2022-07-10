@@ -10,6 +10,7 @@ import BaseBackButton from './components/base/BaseBackButton.vue';
 import BaseNextButton from './components/base/BaseNextButton.vue';
 
 import TheKnightCup from './components/layouts/TheKnightCup.vue';
+import TheProgress from './components/layouts/TheProgress.vue';
 
 const app = createApp(App);
 
@@ -18,6 +19,7 @@ app.component('base-button', BaseButton);
 app.component('base-back-button', BaseBackButton);
 app.component('base-next-button', BaseNextButton);
 app.component('the-knight-cup', TheKnightCup);
+app.component('the-progress', TheProgress);
 
 app.use(store);
 
