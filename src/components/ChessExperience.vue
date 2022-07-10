@@ -10,18 +10,23 @@
   <h1 class="author">- siegbert tarrasch</h1>
   <h2>Chess Experience</h2>
   <strong>This Is Basic Information Fields</strong>
+  <base-dialog v-if="formIsInvalid" title="Invalid Input" @close="confirmError">
+    <template #default>
+      <p>Please fill all fields</p>
+    </template>
+  </base-dialog>
   <form>
+    <h3 class="level_title">Level of knowledge*</h3>
     <div class="level">
-      <select name="nameSelect">
-        <option>Level of knowledge*</option>
+      <select v-model="level" name="nameSelect">
         <option value="1">Beginner</option>
         <option value="2">Intermediate</option>
         <option value="3">Professional</option>
       </select>
     </div>
+    <h3 class="char_title">Choose your character*</h3>
     <div class="character">
-      <select name="nameSelect" @click="loadCharacters">
-        <option>Choose your character*</option>
+      <select name="nameSelect" @click="loadCharacters" v-model="character">
         <chess-characters
           v-for="character in characters"
           :name="character.name"
@@ -41,7 +46,7 @@
     </div>
   </form>
   <base-back-button @click.prevent="navigatePrev">Back</base-back-button>
-  <button id="done" @click.prevent="navigateNext">Done</button>
+  <button id="done" @click.prevent="validateForm">Done</button>
 </template>
 
 <script>
@@ -54,7 +59,7 @@ export default {
   data() {
     return {
       characters: [],
-      isActive: false,
+      formIsInvalid: false,
     };
   },
   computed: {
@@ -64,6 +69,22 @@ export default {
       },
       set(value) {
         this.$store.commit('setAnswer', value);
+      },
+    },
+    level: {
+      get() {
+        return this.$store.state.level;
+      },
+      set(value) {
+        this.$store.commit('setLevel', value);
+      },
+    },
+    character: {
+      get() {
+        return this.$store.state.character;
+      },
+      set(value) {
+        this.$store.commit('setCharacter', value);
       },
     },
   },
@@ -89,6 +110,17 @@ export default {
           this.characters = characters;
         });
     },
+    validateForm() {
+      if (
+        this.answer.trim() === '' ||
+        this.level.trim() === '' ||
+        this.character.trim() === ''
+      ) {
+        this.formIsInvalid = true;
+        return;
+      }
+      this.$router.push('/complete');
+    },
     navigatePrev() {
       if (this.$route.name == 'experience') {
         this.$router.push('/registration');
@@ -99,8 +131,8 @@ export default {
         this.$router.push('/complete');
       }
     },
-    toggleClass() {
-      this.isActive = !this.isActive;
+    confirmError() {
+      this.formIsInvalid = false;
     },
   },
 };
@@ -213,6 +245,32 @@ h1 {
   line-height: 33px;
   text-transform: uppercase;
   color: #093f68;
+}
+
+.level_title {
+  position: absolute;
+  width: 392px;
+  height: 20px;
+  left: 961px;
+  top: 435px;
+  background: #ffffff;
+  color: #212529;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+}
+
+.char_title {
+  position: absolute;
+  width: 392px;
+  height: 20px;
+  left: 1375px;
+  top: 435px;
+  background: #ffffff;
+  color: #212529;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
 }
 
 .reg_title {
@@ -364,5 +422,13 @@ select {
   height: 30px;
   left: 16px;
   top: 8px;
+}
+
+label {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
 }
 </style>
