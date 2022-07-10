@@ -145,6 +145,7 @@ export default {
           this.characters = characters;
         });
     },
+
     validateForm() {
       if (
         this.answer.trim() === '' ||
@@ -155,7 +156,7 @@ export default {
         return;
       }
       this.$router.push('/complete');
-      fetch('https://project-adcfb-default-rtdb.firebaseio.com//users.json', {
+      fetch('https://chess-tournament-api.devtest.ge/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -163,6 +164,7 @@ export default {
         body: JSON.stringify({
           name: this.$store.state.name,
           email: this.$store.state.email,
+          phone: this.$store.state.phone,
           date_of_birth: this.$store.state.date,
           experience_level: this.level,
           already_participated: this.answer,
@@ -187,6 +189,7 @@ export default {
       this.level = '';
       this.answer = null;
       this.character = '';
+      localStorage.clear();
     },
     navigatePrev() {
       if (this.$route.name == 'experience') {
