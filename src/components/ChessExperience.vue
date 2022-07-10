@@ -30,7 +30,7 @@
       </p>
       <p><input type="radio" name="answer" value="No" /> No</p>
     </div>
-    <button @click.prevent="navigatePrev">Back</button>
+    <base-back-button @click.prevent="navigatePrev">Back</base-back-button>
     <button @click.prevent="navigateNext">Done</button>
   </form>
 </template>

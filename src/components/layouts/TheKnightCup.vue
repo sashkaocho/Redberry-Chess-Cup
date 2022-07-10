@@ -32,6 +32,9 @@ h1 {
   color: #ffffff;
 }
 img {
-  width: 18px;
+  width: 19px;
+  position: absolute;
+  left: -26px;
+  top: 8px;
 }
 </style>

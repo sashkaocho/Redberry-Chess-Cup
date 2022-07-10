@@ -100,7 +100,7 @@ img {
 .title {
   position: absolute;
   width: 997px;
-  height: 1280px;
+  height: 1196px;
   left: 923px;
   top: 0px;
   background: #fd5334;

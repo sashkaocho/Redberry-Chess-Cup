@@ -1,5 +1,8 @@
 <template>
-  <h2>Personal Information</h2>
+  <div class="second">
+    <img src="./img/secondpage.png" alt="" />
+  </div>
+  <h1>Personal information</h1>
   <p>This Is Basic Information Fields</p>
   <base-dialog
     v-if="formIsInvalid && (name === '' || name.length < 2)"
@@ -49,22 +52,22 @@
       <button @click="confirmError">Okay</button>
     </template>
   </base-dialog>
-  <form @submit.prevent="validateForm">
-    <div>
+  <form>
+    <div class="form_control">
       <input placeholder="Name*" type="text" v-model="name" />
     </div>
-    <div>
+    <div class="form_control">
       <input placeholder="Email address*" type="text" v-model="email" />
     </div>
-    <div>
+    <div class="form_control">
       <input placeholder="Phone number*" type="number" v-model="phone" />
     </div>
-    <div>
+    <div class="form_control">
       <input placeholder="Date of birth*" type="text" v-model="date" />
     </div>
-    <button @click.prevent="navigatePrev">Back</button>
-    <base-button>Next</base-button>
   </form>
+  <base-back-button @click.prevent="navigatePrev">Back</base-back-button>
+  <base-next-button @click.prevent="validateForm">Next</base-next-button>
 </template>
 
 <script>
@@ -137,27 +140,45 @@ export default {
 </script>
 
 <style scoped>
-form {
-  margin: 1rem;
-  padding: 1rem;
-}
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@800&family=Open+Sans:wght@400;600;800&display=swap');
 
 .form-control {
   margin: 0.5rem 0;
 }
 
-input {
-  display: block;
-  width: 100%;
-  font: inherit;
-  border: 1px solid #ccc;
-  padding: 0.15rem;
+.form_control {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 8px 16px;
+  width: 775px;
+  height: 46px;
+  background: #ffffff;
+  box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.125);
+  border-radius: 4px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
 }
 
-input:focus {
-  border-color: #3d008d;
-  background-color: #faf6ff;
-  outline: none;
+input {
+  width: 743px;
+  height: 30px;
+
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 150%;
+
+  color: #212529;
+  border: 0px;
+
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
 }
 
 .form-control {
@@ -167,5 +188,62 @@ input:focus {
 .disabled {
   opacity: 0.5;
   pointer-events: none;
+}
+
+img {
+  position: absolute;
+  height: 996px;
+  width: 923px;
+  left: 0px;
+  top: 83px;
+  border-radius: 0px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 40px;
+
+  position: absolute;
+  width: 775px;
+  height: 304px;
+  left: 971px;
+  top: 420px;
+}
+
+h1 {
+  position: absolute;
+  width: 500px;
+  height: 48px;
+  left: 971px;
+  top: 278px;
+
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 38px;
+  line-height: 150%;
+
+  color: #000000;
+}
+
+p {
+  position: absolute;
+  width: 250px;
+  height: 21px;
+  left: 971px;
+  top: 350px;
+
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 150%;
+
+  text-transform: capitalize;
+
+  color: #95939a;
 }
 </style>
