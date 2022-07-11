@@ -156,7 +156,7 @@ export default {
         return;
       }
       this.$router.push('/complete');
-      fetch('https://chess-tournament-api.devtest.ge/api/register', {
+      fetch('https://chess-tournament-api.devtest.ge/api/register.json', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
